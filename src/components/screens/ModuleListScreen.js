@@ -1,45 +1,30 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet } from "react-native";
 import Screen from "../layout/Screen";
+import ModuleList from "../entity/modules/ModuleList.js";
+import RenderCount from "../UI/RenderCount.js";
 
 import initialModules from "../../data/modules.js";
 
-const ModuleListScreen = () => {
+const ModuleListScreen = ({ navigation }) => {
   // Initialisations ---------------------
-  const modules = initialModules;
-
   // State -------------------------------
+  const [modules, setModules] = useState(initialModules);
+
   // Handlers ----------------------------
-  const handleSelect = () => alert("Item selected");
+  const handleselct = (module) => navigation.navigate("ModuleViewScreen", { module });
+  const handleDelete = (module) =>
+    setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
+
   // View --------------------------------
   return (
     <Screen>
-      <ScrollView style={styles.container}>
-        {modules.map((module) => {
-          return (
-            <Pressable key={module.ModuleCode} onPress={handleSelect}>
-              <View style={styles.item}>
-                <Text style={styles.text}>
-                  {module.ModuleCode} {module.ModuleName}
-                </Text>
-              </View>
-            </Pressable>
-          );
-        })}
-      </ScrollView>
+      <RenderCount />
+      <ModuleList modules={modules} onSelect={handleselct} />
     </Screen>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {},
-  item: {
-    paddingVertical: 15,
-    borderTopWidth: 1,
-    borderColor: "lightgray",
-  },
-  text: {
-    fontSize: 16,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default ModuleListScreen;
