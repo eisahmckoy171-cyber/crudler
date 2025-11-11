@@ -15,6 +15,13 @@ const ModuleView = ({ module, onDelete }) => {
       `Are you sure that you want to delete module ${module.ModuleCode} ${module.ModuleName}`,
       [{ text: "Cancel" }, { text: "Delete", onPress: handleDelete }]
     );
+import { StyleSheet, Text, View } from "react-native";
+import FullWidthImage from "react-native-fullwidth-image";
+
+const ModuleView = ({ module }) => {
+  // Initialisations ---------------------
+  // State -------------------------------
+  // Handlers ----------------------------
 
   // View --------------------------------
   return (

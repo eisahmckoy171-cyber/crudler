@@ -4,6 +4,11 @@ import Screen from "../layout/Screen";
 import ModuleList from "../entity/modules/ModuleList.js";
 import Icons from "../UI/Icons.js";
 import { Button, ButtonTray } from "../UI/Button.js";
+import { StyleSheet } from "react-native";
+import Screen from "../layout/Screen";
+import ModuleList from "../entity/modules/ModuleList.js";
+import RenderCount from "../UI/RenderCount.js";
+
 import initialModules from "../../data/modules.js";
 
 const ModuleListScreen = ({ navigation }) => {
@@ -43,6 +48,15 @@ const ModuleListScreen = ({ navigation }) => {
         <Button label="Add" icon={<Icons.Add />} onClick={gotoAddScreen} />
       </ButtonTray>
       <ModuleList modules={modules} onSelect={gotoViewScreen} />
+  const handleselct = (module) => navigation.navigate("ModuleViewScreen", { module });
+  const handleDelete = (module) =>
+    setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
+
+  // View --------------------------------
+  return (
+    <Screen>
+      <RenderCount />
+      <ModuleList modules={modules} onSelect={handleselct} />
     </Screen>
   );
 };
